@@ -19,6 +19,8 @@
             align-items: center;
             height: 100vh;
             position: relative;
+            flex-direction: column;
+            overflow: auto;
         }
         .container {
             width: 90%;
@@ -28,6 +30,7 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
             overflow: hidden;
             position: relative;
+            margin-bottom: 20px;
         }
         .header {
             background-color: #3b82f6;
@@ -36,6 +39,18 @@
             font-size: 1.5rem;
             font-weight: bold;
             color: #fff;
+            position: relative;
+        }
+        .refresh-button {
+            position: absolute;
+            left: 16px;
+            top: 16px;
+            background-color: #3b82f6;
+            color: #fff;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
         }
         .leaderboard {
             height: 400px;
@@ -71,7 +86,6 @@
             font-size: 0.9rem;
             color: #a0a0a0;
         }
-        
         .potato-icon {
             position: absolute;
             top: 16px;
@@ -80,18 +94,58 @@
             cursor: pointer;
             transition: transform 0.2s;
         }
-
         .potato-icon:hover {
             transform: scale(1.2);
+        }
+        .twitch-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            width: 100%;
+            max-width: 1200px;
+            position: relative;
+            flex-wrap: wrap;
+        }
+        .twitch-embed  {
+            width: 640px;
+            height: 360px;
+            border: none;
+            max-width: 100%;
+        }
+        .toggle-button {
+            background-color: #3b82f6;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            font-size: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .hidden {
+            display: none;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">Contexto Wins Leaderboard</div>
+        <div class="header">
+            Contexto Wins Leaderboard
+            <button class="refresh-button" onclick="fetchLeaderboard()">Refresh</button>
+        </div>
         <div id="leaderboard" class="leaderboard"></div>
-
         <a href="https://potat.app" target="_blank" class="potato-icon">🥔</a>
+    </div>
+
+    <div class="twitch-container">
+        <iframe
+            id="stream"
+            class="twitch-embed"
+            src="https://player.twitch.tv/?channel=contexto247&parent=sunny.potat.app"
+            frameborder="0"
+            allowfullscreen="true">
+        </iframe>
     </div>
 
     <script>
